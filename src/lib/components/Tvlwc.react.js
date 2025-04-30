@@ -27,7 +27,7 @@ const Tvlwc = props => {
         seriesOptions,
         seriesMarkers,
         seriesPriceLines,
-        panes,
+        paneIds,
         width,
         height,
     } = props;
@@ -41,9 +41,11 @@ const Tvlwc = props => {
     function handleChartOptions(chartOptions) {
         if ('localization' in chartOptions) {
             if ('priceFormatter' in chartOptions.localization) {
+                // eslint-disable-next-line no-eval
                 chartOptions.localization.priceFormatter = eval(chartOptions.localization.priceFormatter);
             }
             if ('timeFormatter' in chartOptions.localization) {
+                // eslint-disable-next-line no-eval
                 chartOptions.localization.timeFormatter = eval(chartOptions.localization.timeFormatter);
             }
         };
@@ -116,64 +118,56 @@ const Tvlwc = props => {
         () => {
             if (tvChart.current) {
                 const newSeries = new Map();
+                for (var i = 0; i < seriesData.length; i++) {
+                    var series, options, data, markers, priceLines, seriesId, paneId;
+                    options = seriesOptions[i] ? seriesOptions[i] : {};
+                    data = seriesData[i] ? seriesData[i] : [];
+                    markers = seriesMarkers[i] ? seriesMarkers[i] : [];
+                    priceLines = seriesPriceLines[i] ? seriesPriceLines[i] : [];
+                    paneId = paneIds[i] ? paneIds[i] : 0;
+                    seriesId = i;
 
-                for (var j = 0; j < panes.length; j++) {
-                    var pane, paneId, paneSeriesData, paneSeriesOptions, paneSeriesMarkers, paneSeriesPriceLines;
-                    var series, options, data, markers, priceLines;
-                    pane = panes[j];
-                    paneId = j;
-
-                    for (var i = 0; i < pane['lines'].length; i++) {
-                      var line, seriesId, options, data, markers, priceLines;
-                      line = pane['lines'][i]
-
-                      options = line['seriesOptions'] ? line['seriesOptions'] : {};
-                      data = line['seriesData'] ? line['seriesData'] : [];
-                      markers = line['seriesMarkers'] ? line['seriesMarkers'] : [];
-                      priceLines = line['seriesPriceLines'] ? line['seriesPriceLines'] : [];
-                      seriesId = i;
-
-                      if (options['ignore_autoscale'] === true) {
-                        options['autoscaleInfoProvider'] = () => ({
-                          priceRange: {
-                            minValue: 1_000_000_000,
-                            maxValue: 0,
-                          }
+                    if (options.ignore_autoscale === true) {
+                        options.autoscaleInfoProvider = () => ({
+                            priceRange: {
+                                minValue: 1_000_000_000,
+                                maxValue: 0,
+                            },
                         });
-                      }
-
-                      switch (line['seriesType']) {
-                          case 'bar':
-                              series = tvChart.current.addSeries(BarSeries, options, paneId);
-                              break;
-                          case 'candlestick':
-                              series = tvChart.current.addSeries(CandlestickSeries, options, paneId);
-                              break;
-                          case 'area':
-                              series = tvChart.current.addSeries(AreaSeries, options, paneId);
-                              break;
-                          case 'baseline':
-                              series = tvChart.current.addSeries(BaselineSeries, options, paneId);
-                              break;
-                          case 'line':
-                              series = tvChart.current.addSeries(LineSeries, options, paneId);
-                              break;
-                          case 'histogram':
-                              series = tvChart.current.addSeries(HistogramSeries, options, paneId);
-                              break;
-                          default:
-                              break;
-                          }
-                      series.setData(data);
-                      const sm = createSeriesMarkers(
-                        series,
-                        markers
-                      )
-                      for (const pl of priceLines) { series.createPriceLine(pl); }
-
-                      newSeries.set((paneId * 100) + seriesId, series);
-
                     }
+
+                    switch (seriesTypes[i]) {
+                        case 'bar':
+                            series = tvChart.current.addSeries(BarSeries, options, paneId);
+                            break;
+                        case 'candlestick':
+                            series = tvChart.current.addSeries(CandlestickSeries, options, paneId);
+                            break;
+                        case 'area':
+                            series = tvChart.current.addSeries(AreaSeries, options, paneId);
+                            break;
+                        case 'baseline':
+                            series = tvChart.current.addSeries(BaselineSeries, options, paneId);
+                            break;
+                        case 'line':
+                            series = tvChart.current.addSeries(LineSeries, options, paneId);
+                            break;
+                        case 'histogram':
+                            series = tvChart.current.addSeries(HistogramSeries, options, paneId);
+                            break;
+                        default:
+                            throw new Error('Unknown series type ' + seriesTypes[i]);
+                    }
+                    series.setData(data);
+                    const sm = createSeriesMarkers(
+                        series,
+                        markers,
+                    );
+                    for (const pl of priceLines) {
+                        series.createPriceLine(pl);
+                    }
+                    // add this seriesId and seriesApi pair to existing allSeries state
+                    newSeries.set((paneId * 100) + seriesId, series);
                 }
 
                 allSeries.current = newSeries;
@@ -197,7 +191,7 @@ const Tvlwc = props => {
             seriesOptions,
             seriesMarkers,
             seriesPriceLines,
-            panes
+            paneIds,
         ]
     );
 
@@ -213,7 +207,7 @@ Tvlwc.defaultProps = {
     seriesOptions: [],
     seriesMarkers: [],
     seriesPriceLines: [],
-    panes: [],
+    paneIds: [],
     crosshair: {},
     click: {},
     fullChartOptions: {},
@@ -266,7 +260,10 @@ Tvlwc.propTypes = {
      */
     seriesPriceLines: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
 
-    panes: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
+    /**
+     * Panel ID for series. Default is 0
+     */
+    paneIds: PropTypes.arrayOf(PropTypes.number),
 
     /**
      * Crosshair coordinates; read-only

@@ -18,7 +18,7 @@ See https://tradingview.github.io/lightweight-charts/docs/api/interfaces/ChartOp
 - `fullSeriesOptions` (Dict; optional): Full series options including defaults; read-only
 - `fullTimeScaleOptions` (Dict; optional): Full time scale options including defaults; read-only
 - `height` (String | Real; optional): Sets height of the parent div of the chart
-- `panes` (Array of Array of Dictss; optional)
+- `paneIds` (Array of Reals; optional): Panel ID for series. Default is 0
 - `priceScaleWidth` (Real; optional): Width of price scale; read-only
 - `seriesData` (Array of Array of Dictss; optional): Data for the series
 - `seriesMarkers` (Array of Array of Dictss; optional): Additional markers for the series
@@ -32,7 +32,7 @@ See https://tradingview.github.io/lightweight-charts/docs/api/interfaces/ChartOp
 - `width` (String | Real; optional): Sets width of the parent div of the chart
 """
 function tvlwc(; kwargs...)
-        available_props = Symbol[:id, :chartOptions, :click, :crosshair, :fullChartOptions, :fullPriceScaleOptions, :fullSeriesOptions, :fullTimeScaleOptions, :height, :panes, :priceScaleWidth, :seriesData, :seriesMarkers, :seriesOptions, :seriesPriceLines, :seriesTypes, :timeRangeVisibleLogicalRange, :timeRangeVisibleRange, :timeScaleHeight, :timeScaleWidth, :width]
+        available_props = Symbol[:id, :chartOptions, :click, :crosshair, :fullChartOptions, :fullPriceScaleOptions, :fullSeriesOptions, :fullTimeScaleOptions, :height, :paneIds, :priceScaleWidth, :seriesData, :seriesMarkers, :seriesOptions, :seriesPriceLines, :seriesTypes, :timeRangeVisibleLogicalRange, :timeRangeVisibleRange, :timeScaleHeight, :timeScaleWidth, :width]
         wild_props = Symbol[]
         return Component("tvlwc", "Tvlwc", "dash_tvlwc", available_props, wild_props; kwargs...)
 end

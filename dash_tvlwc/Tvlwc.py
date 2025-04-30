@@ -38,7 +38,8 @@ Keyword arguments:
 - height (string | number; default 400):
     Sets height of the parent div of the chart.
 
-- panes (list of list of dictss; optional)
+- paneIds (list of numbers; optional):
+    Panel ID for series. Default is 0.
 
 - priceScaleWidth (number; optional):
     Width of price scale; read-only.
@@ -77,10 +78,10 @@ Keyword arguments:
     _namespace = 'dash_tvlwc'
     _type = 'Tvlwc'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, chartOptions=Component.UNDEFINED, seriesData=Component.UNDEFINED, seriesTypes=Component.UNDEFINED, seriesOptions=Component.UNDEFINED, seriesMarkers=Component.UNDEFINED, seriesPriceLines=Component.UNDEFINED, panes=Component.UNDEFINED, crosshair=Component.UNDEFINED, click=Component.UNDEFINED, fullChartOptions=Component.UNDEFINED, fullPriceScaleOptions=Component.UNDEFINED, priceScaleWidth=Component.UNDEFINED, fullSeriesOptions=Component.UNDEFINED, timeRangeVisibleRange=Component.UNDEFINED, timeRangeVisibleLogicalRange=Component.UNDEFINED, timeScaleWidth=Component.UNDEFINED, timeScaleHeight=Component.UNDEFINED, fullTimeScaleOptions=Component.UNDEFINED, width=Component.UNDEFINED, height=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'chartOptions', 'click', 'crosshair', 'fullChartOptions', 'fullPriceScaleOptions', 'fullSeriesOptions', 'fullTimeScaleOptions', 'height', 'panes', 'priceScaleWidth', 'seriesData', 'seriesMarkers', 'seriesOptions', 'seriesPriceLines', 'seriesTypes', 'timeRangeVisibleLogicalRange', 'timeRangeVisibleRange', 'timeScaleHeight', 'timeScaleWidth', 'width']
+    def __init__(self, id=Component.UNDEFINED, chartOptions=Component.UNDEFINED, seriesData=Component.UNDEFINED, seriesTypes=Component.UNDEFINED, seriesOptions=Component.UNDEFINED, seriesMarkers=Component.UNDEFINED, seriesPriceLines=Component.UNDEFINED, paneIds=Component.UNDEFINED, crosshair=Component.UNDEFINED, click=Component.UNDEFINED, fullChartOptions=Component.UNDEFINED, fullPriceScaleOptions=Component.UNDEFINED, priceScaleWidth=Component.UNDEFINED, fullSeriesOptions=Component.UNDEFINED, timeRangeVisibleRange=Component.UNDEFINED, timeRangeVisibleLogicalRange=Component.UNDEFINED, timeScaleWidth=Component.UNDEFINED, timeScaleHeight=Component.UNDEFINED, fullTimeScaleOptions=Component.UNDEFINED, width=Component.UNDEFINED, height=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'chartOptions', 'click', 'crosshair', 'fullChartOptions', 'fullPriceScaleOptions', 'fullSeriesOptions', 'fullTimeScaleOptions', 'height', 'paneIds', 'priceScaleWidth', 'seriesData', 'seriesMarkers', 'seriesOptions', 'seriesPriceLines', 'seriesTypes', 'timeRangeVisibleLogicalRange', 'timeRangeVisibleRange', 'timeScaleHeight', 'timeScaleWidth', 'width']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'chartOptions', 'click', 'crosshair', 'fullChartOptions', 'fullPriceScaleOptions', 'fullSeriesOptions', 'fullTimeScaleOptions', 'height', 'panes', 'priceScaleWidth', 'seriesData', 'seriesMarkers', 'seriesOptions', 'seriesPriceLines', 'seriesTypes', 'timeRangeVisibleLogicalRange', 'timeRangeVisibleRange', 'timeScaleHeight', 'timeScaleWidth', 'width']
+        self.available_properties = ['id', 'chartOptions', 'click', 'crosshair', 'fullChartOptions', 'fullPriceScaleOptions', 'fullSeriesOptions', 'fullTimeScaleOptions', 'height', 'paneIds', 'priceScaleWidth', 'seriesData', 'seriesMarkers', 'seriesOptions', 'seriesPriceLines', 'seriesTypes', 'timeRangeVisibleLogicalRange', 'timeRangeVisibleRange', 'timeScaleHeight', 'timeScaleWidth', 'width']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
