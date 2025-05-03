@@ -11,10 +11,9 @@ Tradingview Lightweight Chart object
 
 \usage{
 tvlwc(id=NULL, chartOptions=NULL, click=NULL, crosshair=NULL,
-fullChartOptions=NULL, fullPriceScaleOptions=NULL,
-fullSeriesOptions=NULL, fullTimeScaleOptions=NULL,
-height=NULL, paneIds=NULL, priceScaleWidth=NULL,
-seriesData=NULL, seriesMarkers=NULL, seriesOptions=NULL,
+fullChartOptions=NULL, fullSeriesOptions=NULL, height=NULL,
+panesHeights=NULL, priceScaleWidths=NULL, seriesData=NULL,
+seriesMarkers=NULL, seriesOptions=NULL, seriesPaneIds=NULL,
 seriesPriceLines=NULL, seriesTypes=NULL,
 timeRangeVisibleLogicalRange=NULL,
 timeRangeVisibleRange=NULL, timeScaleHeight=NULL,
@@ -33,23 +32,28 @@ See https://tradingview.github.io/lightweight-charts/docs/api/interfaces/ChartOp
 
 \item{fullChartOptions}{Named list. Full chart options including defaults; read-only}
 
-\item{fullPriceScaleOptions}{Named list. Full chart price scale options including defaults; read-only}
-
 \item{fullSeriesOptions}{Named list. Full series options including defaults; read-only}
-
-\item{fullTimeScaleOptions}{Named list. Full time scale options including defaults; read-only}
 
 \item{height}{Character | numeric. Sets height of the parent div of the chart}
 
-\item{paneIds}{List of numerics. Panel ID for series. Default is 0}
+\item{panesHeights}{List of lists containing elements 'paneid', 'height'.
+those elements have the following types:
+  - paneid (numeric; required)
+  - height (numeric; required)s. Height of panes; read-only}
 
-\item{priceScaleWidth}{Numeric. Width of price scale; read-only}
+\item{priceScaleWidths}{List with named elements and values of type list of lists containing elements 'paneid', 'scaleid', 'width'.
+those elements have the following types:
+  - paneid (numeric; required)
+  - scaleid (character; required)
+  - width (numeric; required)s. Width of price scales (only left & right price scales are supported); read-only}
 
 \item{seriesData}{List of list of named listss. Data for the series}
 
 \item{seriesMarkers}{List of list of named listss. Additional markers for the series}
 
 \item{seriesOptions}{List of named lists. Options for the series}
+
+\item{seriesPaneIds}{List of numerics. Panel ID for series. Default is 0}
 
 \item{seriesPriceLines}{List of list of named listss. Additional price lines for the series}
 

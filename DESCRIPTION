@@ -1,6 +1,6 @@
 Package: dashTvlwc
 Title: Dash Component for Tradingview Lightweight Charts
-Version: 0.1.3a
+Version: 0.1.4a
 Description: Dash Component for Tradingview Lightweight Charts
 Depends: R (>= 3.0.2)
 Imports: 
