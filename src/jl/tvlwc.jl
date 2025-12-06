@@ -16,7 +16,7 @@ See https://tradingview.github.io/lightweight-charts/docs/api/interfaces/ChartOp
 - `fullChartOptions` (Dict; optional): Full chart options including defaults; read-only
 - `fullSeriesOptions` (Dict; optional): Full series options including defaults; read-only
 - `height` (String | Real; optional): Sets height of the parent div of the chart
-- `panesHeights` (optional): Height of panes; read-only. panesHeights has the following type: Array of lists containing elements 'paneId', 'height'.
+- `panesHeights` (optional): Height of panes; writeable. panesHeights has the following type: Array of lists containing elements 'paneId', 'height'.
 Those elements have the following types:
   - `paneId` (Real; required)
   - `height` (Real; required)s

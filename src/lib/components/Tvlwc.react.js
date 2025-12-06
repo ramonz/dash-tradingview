@@ -415,7 +415,7 @@ Tvlwc.propTypes = {
     timeScaleHeight: PropTypes.number,
 
     /**
-     * Height of panes; read-only
+     * Height of panes; writeable
      */
     panesHeights: PropTypes.arrayOf(
         PropTypes.shape({

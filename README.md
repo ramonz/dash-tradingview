@@ -162,3 +162,8 @@ If you have selected install_dependencies during the prompt, you can skip this p
     ```
     $ pip install -r tests/requirements.txt
     ```
+
+5. Build after making changes
+   ```
+   $ npm run build
+   ```

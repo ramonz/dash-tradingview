@@ -40,7 +40,7 @@ Keyword arguments:
     Sets height of the parent div of the chart.
 
 - panesHeights (list of dicts; optional):
-    Height of panes; read-only.
+    Height of panes; writeable.
 
     `panesHeights` is a list of dicts with keys:
 

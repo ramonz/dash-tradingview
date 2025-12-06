@@ -39,7 +39,7 @@ See https://tradingview.github.io/lightweight-charts/docs/api/interfaces/ChartOp
 \item{panesHeights}{List of lists containing elements 'paneid', 'height'.
 those elements have the following types:
   - paneid (numeric; required)
-  - height (numeric; required)s. Height of panes; read-only}
+  - height (numeric; required)s. Height of panes; writeable}
 
 \item{priceScaleWidths}{List with named elements and values of type list of lists containing elements 'paneid', 'scaleid', 'width'.
 those elements have the following types:
